@@ -61,14 +61,40 @@ function removeTitleFromLibrary(title){
 }
 
 const book1 = new Book("Watership Down", "Richard Adams", 474);
-const book2 = new Book("The Lord of The Rings: The fellowship of the ring", "J.R.R. Tolkien", 900);
+const book2 = new Book("The Lord of The Rings: The Fellowship of The Ring", "J.R.R. Tolkien", 450);
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 updateLibrary();
 
-myLibrary.forEach(b => {
-    console.log(b.info());
+function submitBook(event){
+    event.preventDefault();
+    let titleField = document.getElementById("title")
+    let title = titleField.value;
+    let authorField = document.getElementById("author")
+    let author = authorField.value;
+    let pagesField = document.getElementById("pages")
+    let pages = pagesField.value;
+
+    let newBook = new Book(title,author,pages)
+    console.log(newBook.info())
+    addBookToLibrary(newBook);
+    updateLibrary();
+
+    let myForm = document.getElementById("new-book");
+    myForm.style.display = "none";
+}
+
+let submit = document.getElementById("submit");
+submit.addEventListener(onclick, submitBook)
+
+let newBookButton = document.getElementById("new-book-button");
+newBookButton.addEventListener("click", function() {
+    let myForm = document.getElementById("new-book");
+    myForm.style.display = "flex";
+    console.log("flex");
 });
+
+
 
 
